@@ -1,0 +1,254 @@
+<html lang ="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <style>
+    :root{
+      --bg-color: #0d0d0d;
+      --orange-accent: #ff7a00;
+      --main-text: white;
+      --text-muted: #b3b3b3;
+      --border-color: #27272a;
+      --card-bg: #18181b;
+    }
+
+    body{
+      margin: 0;
+      background-color: var(--bg-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      color: var(--main-text);
+    }
+    
+    aside{
+      width: auto;
+      background-color: var(--card-bg);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      flex-shrink: 0;
+    }
+
+    main{
+      display: flex;
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .logo{
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--main-text);
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo span{
+      color: var(--orange-accent);
+    }
+
+    header{
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    header h1{
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    header p{
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    .nav-item{
+      padding: 12px 15px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-item:hover, .nav-item.active{
+      background-color: rgba(255, 122, 0, 0.1);
+      color: var(--orange-accent);
+      border: 1px solid var(--orange-accent);
+      transform: translateX(5px);
+    }
+
+
+    @keyframes fadeLeft{
+      from {opacity: 0; transform: translateX(0px);}
+      to {opacity: 1; transform: translateX(50px);} 
+    }
+
+    @keyframes fadeRight{
+      from {opacity: 0; transform: translateX(50px);}
+      to {opacity: 1; transform: translateX(0px);} 
+    }
+
+    .sec{
+      display: none;
+    }
+    
+    .projects{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .project{
+      background-color: var(--card-bg);
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: transform 0.5s ease, border 0.5s ease;
+    }
+
+    .project:hover{
+      border: 1px solid var(--orange-accent);
+      transform: scale(1.05);
+    }
+
+    .project-container{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 200px;
+    }
+
+    .sec.show:nth-child(odd){ 
+      display: block;
+      animation: fadeLeft 1.5s forwards;
+    }
+
+    .sec.show:nth-child(even){ 
+      display: block;
+      animation: fadeRight 1.5s forwards;
+    }
+
+    /* section:nth-child(odd){
+      animation: fadeLeft 1.5s forwards;
+    }
+    section:nth-child(even){
+      animation: fadeRight 1.5s ;
+    } */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column; 
+        height: auto;
+        overflow: auto;
+      }
+
+      aside {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      main {
+        height: auto;
+        min-height: auto;
+        overflow: visible;
+      }
+    }
+
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+                const navs = document.querySelectorAll('.nav-item')
+
+                navs.forEach(nav => {
+                    nav.addEventListener('click', () =>{
+                      
+                      const sec = document.querySelectorAll('.sec')
+                      const data = nav.dataset.nav;
+                      const section = document.querySelector(data)
+                      
+                      sec.forEach(sec => {
+                        sec.classList.remove('show')
+                      })
+                      
+                      section.classList.add('show');
+                       // console.log(data)
+
+                      navs.forEach(nav => {
+                        nav.classList.remove('active')
+                      })
+
+                      nav.classList.add('active')
+                    });
+                });
+            })
+  </script>
+ </head>
+ <body>
+    <aside>
+      <div class="logo">😎<span>My Links</span></div>
+      <a href="#default-content" class="nav-item active" data-nav='#default-content'>Dashboard</a>
+      <a href="#about-me" class="nav-item" data-nav='#about-me'>About Me</a>
+      <a href="#projects" class="nav-item" data-nav='#projects'>Projects</a>
+      <a href="#contact" class="nav-item" data-nav='#contact'>Contact</a>
+      <a href="#hosting" class="nav-item" data-nav='#hosting'>Hosting</a>
+  </aside>
+  <main>
+      <section id="default-content" class="sec show">
+        <header>
+          <h1>Welcome to My Website</h1>
+          <p>My small little online presence.</p>
+        </header>        
+      </section>
+
+      <section id="about-me" class="sec">
+        <header>
+          <h1>About Me</h1>
+          <p>Learn more about who I am and what I do.</p>
+        </header>
+      </section>
+
+      <section id="projects" class="sec">
+        <header>
+          <h1>My Projects</h1>
+        <p>Check out some of the things I've built.</p>
+        </header>
+        <div class="project-container">
+          <div class="project">
+          <h2>Project 1</h2>
+          <p>Description of Project 1.</p>
+        </div>
+          <div class="project">
+            <h2>Project 2</h2>
+            <p>Description of Project 2.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="sec">
+        <header>
+          <h1>Contact</h1>
+          <p>Get in touch with me.</p>
+        </header>       
+      </section>
+
+      <section id="hosting" class="sec">
+        <header>
+          <h1>Hosting Details</h1>
+          <p>This webpage is being hosted on a free Oracle Cloud VPS!!!</p>  
+        </header>      
+      </section>
+  </main>
+ </body>
+</html>
