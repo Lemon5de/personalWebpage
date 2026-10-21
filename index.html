@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Website</title>
   <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     :root{
       --bg-color: #0d0d0d;
@@ -38,7 +39,9 @@
       display: flex;
       flex: 1;
       padding: 20px;
+      min-width: 0;
       overflow-y: auto;
+      overflow-x: hidden;
       align-items: flex-start;
       justify-content: center;
     }
@@ -103,10 +106,15 @@
 
     .sec{
       display: none;
+      width: 100%;
+      max-width: 1000px;
+      box-sizing: border-box;
     }
     
     .projects{
       display: flex;
+      min-width: 0;
+      box-sizing: border-box;
       flex-direction: column;
       align-items: center;
     }
@@ -119,15 +127,53 @@
       transition: transform 0.5s ease, border 0.5s ease;
     }
 
-    .project:hover{
+    .project p{
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .project h2, .project p{
+      overflow-wrap: anywhere;
+    }
+
+    .project:hover, .contact-card:hover{
       border: 1px solid var(--orange-accent);
       transform: scale(1.05);
     }
 
     .project-container{
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 200px;
+      width: 100%;
+      grid-template-columns: repeat(2, minmax(0, 420px));
+      gap: 24px;
+      justify-content: center;
+      align-items: start;
+    }
+
+    .contact-card{
+      background-color: var(--card-bg);
+      border: 1px solid var(--orange-accent);
+      padding: 20px;
+      border-radius: 10px;
+      display: block;
+      width: max-content;
+      max-width: 100%;
+      box-sizing: border-box;
+      margin: 15px auto 0;
+      transition: transform 0.5s ease, border 0.5s ease;
+      
+    }
+
+    .contact-link{
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    .contact-link:hover{
+      color: var(--orange-accent);
     }
 
     .sec.show:nth-child(odd){ 
@@ -163,6 +209,10 @@
         height: auto;
         min-height: auto;
         overflow: visible;
+      }
+
+      .project-container {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
@@ -225,14 +275,21 @@
         <p>Check out some of the things I've built.</p>
         </header>
         <div class="project-container">
-          <div class="project">
-          <h2>Project 1</h2>
-          <p>Description of Project 1.</p>
-        </div>
-          <div class="project">
-            <h2>Project 2</h2>
-            <p>Description of Project 2.</p>
-          </div>
+          
+          <a href="https://github.com/Lemon5de/PDsim" target="_blank" class="contact-link">
+            <div class="project">
+              <h2>PD Simulator</h2>
+              <p>This is a bare bones simple PD simulator, which simulates the mathematical behavior of a closed loop control system (specifically a line following robot) with given Kp, Kd, sim time.This should help to give a rough idea.</p>
+            </div>
+          </a>
+
+          <a href="https://github.com/Lemon5de/BanglaGuard" target="_blank" class="contact-link">
+            <div class="project">
+              <h2>BanglaGuard</h2>
+              <p>BanglaGuard is an automated Discord moderation bot engineered to detect and filter obfuscated Bangla slurs, offensive language, and leetspeak variations in real-time.</p>
+            </div>
+          </a>
+
         </div>
       </section>
 
@@ -241,6 +298,9 @@
           <h1>Contact</h1>
           <p>Get in touch with me.</p>
         </header>       
+        <div class="contact-card">
+          <a href="https://github.com/Lemon5de" target="_blank" class="contact-link"><span><i class="fa fa-github" style="font-size:36px"></i> GitHub Profile</span></a>
+        </div>
       </section>
 
       <section id="hosting" class="sec">
